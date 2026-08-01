@@ -387,5 +387,22 @@ public final class YtDlpManager {
             return new DownloadResult(false, "Exception: " + t.getMessage());
         }
     }
+
+//    public static SearchResults searchYoutube(String query) {
+//        if (!ensureBinariesPresent(onProgress)) {
+//            return new SearchResults(false, "message.opensoundboard.binaries_missing");
+//        }
+//
+//        File ytDlp = ytDlpFile();
+//
+//        java.util.List<String> args = new java.util.ArrayList<>();
+//        args.add(ytDlp.getAbsolutePath());
+//        args.add("--get-id");
+//        args.add("--get-title");
+//
+//        args.add("ytsearch3:" + query);
+//
+//        return new SearchResults(true, ...)
+//    }
 }
 
