@@ -145,18 +145,18 @@ public abstract class OsbScreen extends Screen {
 
     // ---- render entrypoint (26.1 render overhaul) --------------------------------------
     //? if >=26 {
-    /*@Override
+    @Override
     public void extractRenderState(net.minecraft.client.gui.GuiGraphicsExtractor g, int mouseX, int mouseY, float delta) {
         super.extractRenderState(g, mouseX, mouseY, delta);
         paint(new UiCanvas(g, this.font, mouseX, mouseY));
     }
-    *///?} else {
-    @Override
+    //?} else {
+    /*@Override
     public void render(net.minecraft.client.gui.GuiGraphics g, int mouseX, int mouseY, float delta) {
         super.render(g, mouseX, mouseY, delta);
         paint(new UiCanvas(g, this.font, mouseX, mouseY));
     }
-    //?}
+    *///?}
 
     // ---- input (1.21.11 input overhaul: primitives -> event objects) -------------------
     //? if >=1.21.11 {

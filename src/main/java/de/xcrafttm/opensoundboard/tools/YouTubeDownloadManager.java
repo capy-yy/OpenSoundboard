@@ -1,6 +1,10 @@
 package de.xcrafttm.opensoundboard.tools;
 
+import de.xcrafttm.opensoundboard.OpenSoundboardClient;
 import net.minecraft.network.chat.Component;
+import org.apache.logging.log4j.core.appender.rewrite.LoggerNameLevelRewritePolicy;
+import org.slf4j.Logger;
+import org.spongepowered.asm.logging.ILogger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -89,6 +93,11 @@ public final class YouTubeDownloadManager {
         synchronized (LOCK) {
             return new Snapshot(state, progress, List.copyOf(LOG_LINES), revision);
         }
+    }
+
+    public static void search(String query) {
+        List<YtDlpManager.VideoInfo> result = YtDlpManager.searchYoutube(query, YouTubeDownloadManager::onProcessStart);
+        OpenSoundboardClient.LOGGER.info(result.toString());
     }
 
     private static void runDownload(String url) {

@@ -4,10 +4,10 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.network.chat.Component;
 //? if >=26 {
-/*import net.minecraft.client.gui.GuiGraphicsExtractor;
-*///?} else {
-import net.minecraft.client.gui.GuiGraphics;
-//?}
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+//?} else {
+/*import net.minecraft.client.gui.GuiGraphics;
+*///?}
 
 /**
  * Version-neutral drawing surface. All differences across the 26.1 render overhaul
@@ -17,19 +17,19 @@ import net.minecraft.client.gui.GuiGraphics;
 public final class UiCanvas {
 
     //? if >=26 {
-    /*public final GuiGraphicsExtractor g;
-    *///?} else {
-    public final GuiGraphics g;
-    //?}
+    public final GuiGraphicsExtractor g;
+    //?} else {
+    /*public final GuiGraphics g;
+    *///?}
     public final Font font;
     public final int mouseX;
     public final int mouseY;
 
     //? if >=26 {
-    /*public UiCanvas(GuiGraphicsExtractor g, Font font, int mouseX, int mouseY) {
-    *///?} else {
-    public UiCanvas(GuiGraphics g, Font font, int mouseX, int mouseY) {
-    //?}
+    public UiCanvas(GuiGraphicsExtractor g, Font font, int mouseX, int mouseY) {
+    //?} else {
+    /*public UiCanvas(GuiGraphics g, Font font, int mouseX, int mouseY) {
+    *///?}
         this.g = g;
         this.font = font;
         this.mouseX = mouseX;
@@ -98,10 +98,10 @@ public final class UiCanvas {
         float scale = UiStyle.fontScale();
         if (scale != 1F) pushTextPose(x, y, scale);
         //? if >=26 {
-        /*g.text(font, s, scale == 1F ? x : 0, scale == 1F ? y : 0, color, false);
-        *///?} else {
-        g.drawString(font, s, scale == 1F ? x : 0, scale == 1F ? y : 0, color, false);
-        //?}
+        g.text(font, s, scale == 1F ? x : 0, scale == 1F ? y : 0, color, false);
+        //?} else {
+        /*g.drawString(font, s, scale == 1F ? x : 0, scale == 1F ? y : 0, color, false);
+        *///?}
         if (scale != 1F) popTextPose();
     }
 
@@ -109,10 +109,10 @@ public final class UiCanvas {
         float scale = UiStyle.fontScale();
         if (scale != 1F) pushTextPose(centerX, y, scale);
         //? if >=26 {
-        /*g.centeredText(font, s, scale == 1F ? centerX : 0, scale == 1F ? y : 0, color);
-        *///?} else {
-        g.drawCenteredString(font, s, scale == 1F ? centerX : 0, scale == 1F ? y : 0, color);
-        //?}
+        g.centeredText(font, s, scale == 1F ? centerX : 0, scale == 1F ? y : 0, color);
+        //?} else {
+        /*g.drawCenteredString(font, s, scale == 1F ? centerX : 0, scale == 1F ? y : 0, color);
+        *///?}
         if (scale != 1F) popTextPose();
     }
 
@@ -173,10 +173,10 @@ public final class UiCanvas {
     /** Render a native Minecraft component inside the shared OpenSoundboard layout. */
     public void renderVanilla(AbstractWidget widget) {
         //? if >=26 {
-        /*widget.extractRenderState(g, mouseX, mouseY, 0F);
-        *///?} else {
-        widget.render(g, mouseX, mouseY, 0F);
-        //?}
+        widget.extractRenderState(g, mouseX, mouseY, 0F);
+        //?} else {
+        /*widget.render(g, mouseX, mouseY, 0F);
+        *///?}
     }
 
     /** True if the point (mouseX, mouseY) is inside the given rectangle. */

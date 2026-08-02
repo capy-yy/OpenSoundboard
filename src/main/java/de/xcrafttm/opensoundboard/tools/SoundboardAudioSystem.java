@@ -217,18 +217,18 @@ public final class SoundboardAudioSystem {
     // into sendOverlayMessage(Component) (action bar) and sendSystemMessage(Component) (chat).
     private static void actionBar(LocalPlayer player, Component msg) {
         //? if >=26 {
-        /*player.sendOverlayMessage(msg);
-        *///?} else {
-        player.displayClientMessage(msg, true);
-        //?}
+        player.sendOverlayMessage(msg);
+        //?} else {
+        /*player.displayClientMessage(msg, true);
+        *///?}
     }
 
     private static void chat(LocalPlayer player, Component msg) {
         //? if >=26 {
-        /*player.sendSystemMessage(msg);
-        *///?} else {
-        player.displayClientMessage(msg, false);
-        //?}
+        player.sendSystemMessage(msg);
+        //?} else {
+        /*player.displayClientMessage(msg, false);
+        *///?}
     }
 
     private static short[] resample(short[] input, int inputRate, int outputRate) {

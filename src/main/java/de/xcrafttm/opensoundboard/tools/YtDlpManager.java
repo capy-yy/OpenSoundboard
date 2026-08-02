@@ -6,6 +6,8 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
@@ -388,21 +390,72 @@ public final class YtDlpManager {
         }
     }
 
-//    public static SearchResults searchYoutube(String query) {
-//        if (!ensureBinariesPresent(onProgress)) {
-//            return new SearchResults(false, "message.opensoundboard.binaries_missing");
-//        }
-//
-//        File ytDlp = ytDlpFile();
-//
-//        java.util.List<String> args = new java.util.ArrayList<>();
-//        args.add(ytDlp.getAbsolutePath());
-//        args.add("--get-id");
-//        args.add("--get-title");
-//
-//        args.add("ytsearch3:" + query);
-//
-//        return new SearchResults(true, ...)
-//    }
+    public record VideoInfo(
+            String title,
+            String id,
+            String duration
+    ) {}
+
+    public static List<VideoInfo> searchYoutube(String query, Consumer<Process> onProcessStart) {
+        List<VideoInfo> results = new ArrayList<>();
+        File ytDlp = ytDlpFile();
+
+        java.util.List<String> args = new java.util.ArrayList<>();
+        args.add(ytDlp.getAbsolutePath());
+        args.add("--print id,title,duration_string");
+
+        args.add("ytsearch3:" + query);
+
+
+        try {
+            ProcessBuilder pb = new ProcessBuilder(args);
+            pb.directory(soundDir());
+            pb.redirectErrorStream(true);
+
+            Process proc = pb.start();
+            if (onProcessStart != null) onProcessStart.accept(proc);
+
+
+            String title = null;
+            String id = null;
+            String duration = null;
+
+            StringBuilder output = new StringBuilder();
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(proc.getInputStream()))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    if (!line.isBlank()) {
+                        if (title == null) {
+                            title = line;
+                        } else if (id == null) {
+                            id = line;
+                        } else if (duration == null) {
+                            duration = line;
+                        } else {
+                            results.add(new VideoInfo(title, id, duration));
+                            title = null;
+                            id = null;
+                            duration = null;
+                        }
+                    }
+                }
+            }
+
+            boolean finished = proc.waitFor(10, TimeUnit.MINUTES);
+            if (!finished) {
+                proc.destroyForcibly();
+            }
+
+            int exit = proc.exitValue();
+            if (exit == 0) {
+                return results;
+            }
+        } catch (Throwable t) {
+            t.printStackTrace();
+        }
+
+
+        return results;
+    }
 }
 

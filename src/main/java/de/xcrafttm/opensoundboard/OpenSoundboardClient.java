@@ -56,12 +56,12 @@ public class OpenSoundboardClient implements ClientModInitializer {
 
         // Fabric renamed KeyBindingHelper -> KeyMappingHelper for the 26.x API.
         //? if >=26 {
-        /*openKey = net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper.registerKeyMapping(openKm);
+        openKey = net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper.registerKeyMapping(openKm);
         wheelKey = net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper.registerKeyMapping(wheelKm);
-        *///?} else {
-        openKey = net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper.registerKeyBinding(openKm);
+        //?} else {
+        /*openKey = net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper.registerKeyBinding(openKm);
         wheelKey = net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper.registerKeyBinding(wheelKm);
-        //?}
+        *///?}
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             KeybindHandler.tick(client, soundDir);

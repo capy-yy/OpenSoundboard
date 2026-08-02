@@ -13,6 +13,9 @@ import de.xcrafttm.opensoundboard.ui.widgets.TextField;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 
+import static de.xcrafttm.opensoundboard.tools.YouTubeDownloadManager.search;
+import static de.xcrafttm.opensoundboard.tools.YtDlpManager.searchYoutube;
+
 /** yt-dlp downloader: URL field, audio-only toggle, download/folder, progress bar, and a log. */
 public class YouTubeScreen extends OsbScreen {
 
@@ -56,9 +59,14 @@ public class YouTubeScreen extends OsbScreen {
         downloadBtn = add(new Button(downloadLabel(), b -> onDownload()));
         downloadBtn.bounds(actionX, y, downloadW/2, 16)
                 .tooltip(Component.translatable("tooltip.opensoundboard.youtube").getString());
-        add(new Button(Component.literal("🔎 ").append("Search"),                       // TODO: add translation
-                b -> McCompat.openFolder(OpenSoundboardClient.soundDir)).secondary())
-                .bounds(actionX+downloadW/2+actionGap, y, downloadW/2, 22).tooltip(Component.translatable("tooltip.opensoundboard.folder").getString());
+        add(
+                new Button(
+                        Component.literal("🔎 ").append("Search"),
+                        b -> search("jarona deltarune")
+                )
+                        .bounds(actionX + downloadW / 2 + actionGap, y, downloadW / 2, 22)
+                        .tooltip(Component.translatable("tooltip.opensoundboard.folder").getString())
+        );
         add(new Button(Component.literal("📁 ").append(Component.translatable("gui.opensoundboard.folder")),
                 b -> McCompat.openFolder(OpenSoundboardClient.soundDir)).secondary())
                 .bounds(actionX + downloadW + actionGap, y, folderW, 16)
